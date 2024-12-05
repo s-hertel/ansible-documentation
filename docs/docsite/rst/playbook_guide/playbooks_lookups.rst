@@ -21,7 +21,7 @@ You can use the ``lookup`` function to populate variables dynamically. Ansible e
       - debug:
           msg: "motd value is {{ motd_value }}"
 
-The first argument to the ``lookup`` function is required and specifies the name of the lookup plugin. If the lookup plugin is a collection the fully qualified name must be provided, since the :ref:`collections keyword<collections_keyword>` does not apply to lookup plugins.
+The first argument to the ``lookup`` function is required and specifies the name of the lookup plugin. If the lookup plugin is in a collection, the fully qualified name must be provided, since the :ref:`collections keyword<collections_keyword>` does not apply to lookup plugins.
 
 The ``lookup`` function also accepts an optional boolean keyword ``wantlist``, which defaults to ``False``. When ``True``, the result of the lookup is ensured to be a list.
 
@@ -36,17 +36,14 @@ This function is shorthand for ``lookup(..., wantlist=True)``. These are equival
 
 .. code-block:: yaml+jinja
 
-   vars:
-    arguments: "{{ list_of_strings | default([]) }}"
-    keyword_arguments: "{{ dict_of_options | default({}) }}"
    block:
      - debug:
          msg: "{{ item }}"
-       loop: "{{ lookup('ns.col.lookup_items', *arguments, wantlist=True, **keyword_arguments) }}"
+       loop: "{{ lookup('ns.col.lookup_items', wantlist=True) }}"
 
      - debug:
          msg: "{{ item }}"
-       loop: "{{ q('ns.col.lookup_items', *arguments, **keyword_arguments) }}"
+       loop: "{{ q('ns.col.lookup_items') }}"
 
 For more details and a list of lookup plugins in ansible-core, see :ref:`plugins_lookup`. You may also find lookup plugins in collections. You can review a list of lookup plugins installed on your control machine with the command ``ansible-doc -l -t lookup``.
 
