@@ -1186,7 +1186,7 @@ To get a union of two lists:
     # list1: [1, 2, 5, 1, 3, 4, 10]
     # list2: [1, 2, 3, 4, 5, 11, 99]
     {{ list1 | union(list2) }}
-    # => [1, 2, 5, 1, 3, 4, 10, 11, 99]
+    # => [1, 2, 5, 3, 4, 10, 11, 99]
 
 To get the intersection of 2 lists (unique list of all items in both):
 
